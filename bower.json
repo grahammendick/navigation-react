@@ -1,0 +1,20 @@
+{
+  "name": "navigation-react",
+  "version": "1.0.0",
+  "description": "A plugin for the Navigation routing library that lets you build Hyperlinks using React's binding syntax",
+  "main": "navigation.react.min.js",
+  "keywords": [
+    "router",
+    "navigation",
+    "react"
+  ],
+  "dependencies": {
+    "navigation": "*",
+    "react": "*"
+  },
+  "authors": [
+    "Graham Mendick"
+  ],
+  "license": "Apache License 2.0",
+  "homepage": "http://grahammendick.github.io/navigation/example/react/navigation.html"
+}
