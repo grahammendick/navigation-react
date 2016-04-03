@@ -15,6 +15,6 @@
   "authors": [
     "Graham Mendick"
   ],
-  "license": "Apache License 2.0",
-  "homepage": "http://grahammendick.github.io/navigation/example/react/navigation.html"
+  "license": "Apache-2.0",
+  "homepage": "http://grahammendick.github.io/navigation/"
 }
