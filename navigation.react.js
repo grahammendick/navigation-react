@@ -1,5 +1,5 @@
 /**
- * Navigation React v2.0.1
+ * Navigation React v2.0.2
  * (c) Graham Mendick - http://grahammendick.github.io/navigation/
  * License: Apache-2.0
  */
@@ -42,10 +42,15 @@ var LinkUtility = (function () {
         if (active && disableActive)
             props.href = null;
     };
-    LinkUtility.addListeners = function (component, stateNavigator, props, getLink) {
+    LinkUtility.isValidAttribute = function (attr) {
+        return attr !== 'stateNavigator' && attr !== 'stateKey' && attr !== 'navigationData' && attr !== 'includeCurrentData'
+            && attr !== 'currentDataKeys' && attr !== 'activeCssClass' && attr !== 'disableActive' && attr !== 'distance'
+            && attr !== 'lazy' && attr !== 'historyAction' && attr !== 'navigating' && attr !== 'children';
+    };
+    LinkUtility.addListeners = function (component, stateNavigator, props, toProps, getLink) {
         var _this = this;
         var lazy = !!props.lazy;
-        props.onClick = function (e, domId) {
+        toProps.onClick = function (e, domId) {
             var element = component['el'];
             var href = element.href;
             if (lazy) {
@@ -66,7 +71,7 @@ var LinkUtility = (function () {
             }
         };
         if (lazy)
-            props.onContextMenu = function (e) { return component.forceUpdate(); };
+            toProps.onContextMenu = function (e) { return component.forceUpdate(); };
     };
     LinkUtility.getNavigating = function (props) {
         return function (e, domId, link) {
@@ -114,11 +119,13 @@ var NavigationBackLink = (function (_super) {
     NavigationBackLink.prototype.render = function () {
         var _this = this;
         var props = { ref: function (el) { return _this['el'] = el; } };
-        for (var key in this.props)
-            props[key] = this.props[key];
+        for (var key in this.props) {
+            if (LinkUtility.isValidAttribute(key))
+                props[key] = this.props[key];
+        }
         props.href = this.getNavigationBackLink();
-        LinkUtility.addListeners(this, this.getStateNavigator(), props, function () { return _this.getNavigationBackLink(); });
-        return React.createElement('a', props);
+        LinkUtility.addListeners(this, this.getStateNavigator(), this.props, props, function () { return _this.getNavigationBackLink(); });
+        return React.createElement('a', props, this.props.children);
     };
     NavigationBackLink.contextTypes = {
         stateNavigator: React.PropTypes.object
@@ -164,17 +171,19 @@ var NavigationLink = (function (_super) {
     NavigationLink.prototype.render = function () {
         var _this = this;
         var props = { ref: function (el) { return _this['el'] = el; } };
-        for (var key in this.props)
-            props[key] = this.props[key];
+        for (var key in this.props) {
+            if (LinkUtility.isValidAttribute(key))
+                props[key] = this.props[key];
+        }
         var active = true;
         for (var key in this.props.navigationData) {
             active = active && LinkUtility.isActive(this.getStateNavigator(), key, this.props.navigationData[key]);
         }
         props.href = this.getNavigationLink();
-        LinkUtility.addListeners(this, this.getStateNavigator(), props, function () { return _this.getNavigationLink(); });
+        LinkUtility.addListeners(this, this.getStateNavigator(), this.props, props, function () { return _this.getNavigationLink(); });
         active = active && !!props.href && this.getStateNavigator().stateContext.state && this.getStateNavigator().stateContext.state.key === this.props.stateKey;
         LinkUtility.setActive(props, active, this.props.activeCssClass, this.props.disableActive);
-        return React.createElement('a', props);
+        return React.createElement('a', props, this.props.children);
     };
     NavigationLink.contextTypes = {
         stateNavigator: React.PropTypes.object
@@ -234,17 +243,19 @@ var RefreshLink = (function (_super) {
     RefreshLink.prototype.render = function () {
         var _this = this;
         var props = { ref: function (el) { return _this['el'] = el; } };
-        for (var key in this.props)
-            props[key] = this.props[key];
+        for (var key in this.props) {
+            if (LinkUtility.isValidAttribute(key))
+                props[key] = this.props[key];
+        }
         var active = true;
         for (var key in this.props.navigationData) {
             active = active && LinkUtility.isActive(this.getStateNavigator(), key, this.props.navigationData[key]);
         }
         props.href = this.getRefreshLink();
-        LinkUtility.addListeners(this, this.getStateNavigator(), props, function () { return _this.getRefreshLink(); });
+        LinkUtility.addListeners(this, this.getStateNavigator(), this.props, props, function () { return _this.getRefreshLink(); });
         active = active && !!props.href;
         LinkUtility.setActive(props, active, this.props.activeCssClass, this.props.disableActive);
-        return React.createElement('a', props);
+        return React.createElement('a', props, this.props.children);
     };
     RefreshLink.contextTypes = {
         stateNavigator: React.PropTypes.object
