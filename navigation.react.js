@@ -1,10 +1,80 @@
 /**
- * Navigation React v2.0.3
+ * Navigation React v2.0.4
  * (c) Graham Mendick - http://grahammendick.github.io/navigation/
  * License: Apache-2.0
  */
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.NavigationReact = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-"use strict";
+(function (exports,React) {
+'use strict';
+
+
+
+
+var extendStatics = Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function __values(o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+}
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+
+
+
+
+
+
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator];
+    return m ? m.call(o) : typeof __values === "function" ? __values(o) : o[Symbol.iterator]();
+}
+
 var LinkUtility = (function () {
     function LinkUtility() {
     }
@@ -94,28 +164,18 @@ var LinkUtility = (function () {
     };
     return LinkUtility;
 }());
-module.exports = LinkUtility;
-},{}],2:[function(_dereq_,module,exports){
-(function (global){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var LinkUtility = _dereq_('./LinkUtility');
-var React = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
+
 var NavigationBackLink = (function (_super) {
     __extends(NavigationBackLink, _super);
     function NavigationBackLink(props, context) {
-        var _this = this;
-        _super.call(this, props, context);
-        this.onNavigate = function () {
+        var _this = _super.call(this, props, context) || this;
+        _this.onNavigate = function () {
             if (_this.state.stateContext !== _this.getStateNavigator().stateContext.url
                 || _this.state.crumb !== _this.getNavigationBackLink())
                 _this.setState(_this.getNextState());
         };
-        this.state = this.getNextState();
+        _this.state = _this.getNextState();
+        return _this;
     }
     NavigationBackLink.prototype.getStateNavigator = function () {
         return this.props.stateNavigator || this.context.stateNavigator;
@@ -152,34 +212,22 @@ var NavigationBackLink = (function (_super) {
         LinkUtility.addListeners(this, this.getStateNavigator(), this.props, props, function () { return _this.getNavigationBackLink(); });
         return React.createElement('a', props, this.props.children);
     };
-    NavigationBackLink.contextTypes = {
-        stateNavigator: React.PropTypes.object
-    };
     return NavigationBackLink;
 }(React.Component));
-;
-module.exports = NavigationBackLink;
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./LinkUtility":1}],3:[function(_dereq_,module,exports){
-(function (global){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+NavigationBackLink.contextTypes = {
+    stateNavigator: React.PropTypes.object
 };
-var LinkUtility = _dereq_('./LinkUtility');
-var React = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
+
 var NavigationLink = (function (_super) {
     __extends(NavigationLink, _super);
     function NavigationLink(props, context) {
-        var _this = this;
-        _super.call(this, props, context);
-        this.onNavigate = function () {
+        var _this = _super.call(this, props, context) || this;
+        _this.onNavigate = function () {
             if (_this.state.stateContext !== _this.getStateNavigator().stateContext.url)
                 _this.setState(_this.getNextState());
         };
-        this.state = this.getNextState();
+        _this.state = _this.getNextState();
+        return _this;
     }
     NavigationLink.prototype.getStateNavigator = function () {
         return this.props.stateNavigator || this.context.stateNavigator;
@@ -216,48 +264,22 @@ var NavigationLink = (function (_super) {
             LinkUtility.setActive(this.getStateNavigator(), this.props, props);
         return React.createElement('a', props, this.props.children);
     };
-    NavigationLink.contextTypes = {
-        stateNavigator: React.PropTypes.object
-    };
     return NavigationLink;
 }(React.Component));
-;
-module.exports = NavigationLink;
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./LinkUtility":1}],4:[function(_dereq_,module,exports){
-"use strict";
-var NavigationBackLink = _dereq_('./NavigationBackLink');
-var NavigationLink = _dereq_('./NavigationLink');
-var RefreshLink = _dereq_('./RefreshLink');
-var NavigationReact = (function () {
-    function NavigationReact() {
-    }
-    NavigationReact.NavigationBackLink = NavigationBackLink;
-    NavigationReact.NavigationLink = NavigationLink;
-    NavigationReact.RefreshLink = RefreshLink;
-    return NavigationReact;
-}());
-module.exports = NavigationReact;
-},{"./NavigationBackLink":2,"./NavigationLink":3,"./RefreshLink":5}],5:[function(_dereq_,module,exports){
-(function (global){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+NavigationLink.contextTypes = {
+    stateNavigator: React.PropTypes.object
 };
-var LinkUtility = _dereq_('./LinkUtility');
-var React = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
+
 var RefreshLink = (function (_super) {
     __extends(RefreshLink, _super);
     function RefreshLink(props, context) {
-        var _this = this;
-        _super.call(this, props, context);
-        this.onNavigate = function () {
+        var _this = _super.call(this, props, context) || this;
+        _this.onNavigate = function () {
             if (_this.state.stateContext !== _this.getStateNavigator().stateContext.url)
                 _this.setState(_this.getNextState());
         };
-        this.state = this.getNextState();
+        _this.state = _this.getNextState();
+        return _this;
     }
     RefreshLink.prototype.getStateNavigator = function () {
         return this.props.stateNavigator || this.context.stateNavigator;
@@ -293,13 +315,14 @@ var RefreshLink = (function (_super) {
         LinkUtility.setActive(this.getStateNavigator(), this.props, props);
         return React.createElement('a', props, this.props.children);
     };
-    RefreshLink.contextTypes = {
-        stateNavigator: React.PropTypes.object
-    };
     return RefreshLink;
 }(React.Component));
-;
-module.exports = RefreshLink;
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./LinkUtility":1}]},{},[4])(4)
-});
+RefreshLink.contextTypes = {
+    stateNavigator: React.PropTypes.object
+};
+
+exports.NavigationBackLink = NavigationBackLink;
+exports.NavigationLink = NavigationLink;
+exports.RefreshLink = RefreshLink;
+
+}((this.NavigationReact = this.NavigationReact || {}),React));
