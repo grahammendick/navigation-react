@@ -1,5 +1,5 @@
 /**
- * Navigation React v2.0.4
+ * Navigation React v2.0.5
  * (c) Graham Mendick - http://grahammendick.github.io/navigation/
  * License: Apache-2.0
  */
@@ -35,16 +35,7 @@ function __extends(d, b) {
 
 
 
-function __values(o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-}
+
 
 function __read(o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
@@ -65,14 +56,8 @@ function __read(o, n) {
 
 
 
-
-
-
-
-function __asyncValues(o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator];
-    return m ? m.call(o) : typeof __values === "function" ? __values(o) : o[Symbol.iterator]();
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
 }
 
 var LinkUtility = (function () {
@@ -215,7 +200,7 @@ var NavigationBackLink = (function (_super) {
     return NavigationBackLink;
 }(React.Component));
 NavigationBackLink.contextTypes = {
-    stateNavigator: React.PropTypes.object
+    stateNavigator: function () { }
 };
 
 var NavigationLink = (function (_super) {
@@ -267,7 +252,7 @@ var NavigationLink = (function (_super) {
     return NavigationLink;
 }(React.Component));
 NavigationLink.contextTypes = {
-    stateNavigator: React.PropTypes.object
+    stateNavigator: function () { }
 };
 
 var RefreshLink = (function (_super) {
@@ -318,7 +303,7 @@ var RefreshLink = (function (_super) {
     return RefreshLink;
 }(React.Component));
 RefreshLink.contextTypes = {
-    stateNavigator: React.PropTypes.object
+    stateNavigator: function () { }
 };
 
 exports.NavigationBackLink = NavigationBackLink;
